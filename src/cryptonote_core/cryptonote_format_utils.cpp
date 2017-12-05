@@ -779,7 +779,8 @@ namespace cryptonote
     blobdata bd;
     if(!get_block_hashing_blob(b, bd))
       return false;
-    crypto::cn_slow_hash(bd.data(), bd.size(), res);
+    int light = height >= LIGHT_HASH_START_HEIGHT;
+    crypto::cn_slow_hash(bd.data(), bd.size(), res, light);
     return true;
   }
   //---------------------------------------------------------------
